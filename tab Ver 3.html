@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .courses {
+            display: flex;
+        }
+
+        .course {
+            height: 30px;
+            padding: 0 10px;
+            border: solid 1px black;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .course.active {
+            background-color: lightcoral;
+        }
+
+        .content {
+            width: 400px;
+            height: 200px;
+            padding: 10px;
+            border: black 1px solid;
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="courses">
+            <div class="course active">國文</div>
+            <div class="course">英文</div>
+            <div class="course">數學</div>
+        </div>
+
+        <div class="contents">
+            <div class="content active" data-tag="國文">
+                床前明月光，<br>
+                疑是地上霜，<br>
+                舉頭望明月，<br>
+                低頭思故鄉。
+            </div>
+            <div data-tag="英文" class="content">
+                Winners do what losers don’t want to do.
+
+            </div>
+            <div data-tag="數學" class="content">
+                1. (a+b)(c+d) = ac+ad+bc+bd<br>
+                2. (a ± b)2 = a2 ± 2ab + b2<br>
+                3. (a+b)(a-b) = a2 - b2
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var courseElements = document.querySelectorAll('.course')
+        var contentElements = document.querySelectorAll('.content')
+        // [course1, course2,course3]
+        courseElements.forEach(function (courseElement, index) {
+            courseElement.addEventListener('click', function () {
+                // 移除當前有 active 的 course
+                var allcourseElement = document.querySelector('.course.active')
+                allcourseElement.classList.remove('active')
+                // 被點擊的 course 新增 active
+                courseElement.classList.add('active')
+
+                var allcontentElement = document.querySelector('.content.active')
+                allcontentElement.classList.remove('active')
+
+                var coursevalue = courseElement.textContent
+                var contentElement = document.querySelector('[data-tag="'+coursevalue+'"]')
+                contentElement.classList.add('active')
+
+
+            })
+        })
+    </script>
+</body>
+
+</html>
